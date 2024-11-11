@@ -1,24 +1,29 @@
 # Project Plan
 ## Title
-Comprehensive Analysis of Crime Patterns in Los Angeles: A Multi-Dimensional Exploration of Temporal, Geographical, and Demographic Factors.
+Analyzing Patterns and Outcomes of Crimes and Arrests in Urban Areas of Los Angeles in USA.
 
 
 ## Description
-This projects covers various aspects of crime data including trends over time, geographical hotspots, victim demographics, weapon usage, and more. It emphasizes a holistic approach to understanding and analyzing crime patterns across multiple dimensions in Los Angeles from 2020 to present.
+This research intends to map out and compare the types of crimes and the corresponding arrests made, examining how these vary from one urban area to another. By integrating data from both crime reports and arrest records, the project will identify prevalent crime-arrest patterns, and explore demographic trends among both victims and offenders in Los Angeles from 2020 to present.
 
 
 ## Main Questions
--How can law enforcement optimize resource allocation based on identified crime hotspots and temporal trends? <br />
+-Does the frequency and type of arrests in specific neighborhoods correlate with reductions in crime rates over time in those same areas? <br />
 -Is there a pattern in victim demographics (age, sex, descent) for specific types of crimes?
 
 
 ## Datasources
-### Datasource: The Home of the U.S. Government's Open Data
+### Datasource-1: The Home of the U.S. Government's Open Data
 Metadata URL: [Crime Data from 2020 to Present](https://catalog.data.gov/dataset/crime-data-from-2020-to-present). <br />
 Data URL: [Download CSV Dataset](https://data.lacity.org/api/views/2nrs-mtv8/rows.csv?accessType=DOWNLOAD) <br />
 Data Type: CSV .<br />
-This dataset reflects incidents of crime in the City of Los Angeles dating back to 2020. This data is transcribed from original crime reports that are typed on paper and therefore there may be some inaccuracies within the data.
+This dataset reflects incidents of crime in the City of Los Angeles dating back to 2020. This data is transcribed from original crime reports that are typed on paper and therefore there may be some inaccuracies within the data. <br/>
 
+### Datasource-2: The Home of the U.S. Government's Open Data
+Metadata URL: [Arrest Data from 2020 to Present](https://catalog.data.gov/dataset/arrest-data-from-2020-to-present). <br />
+Data URL: [Download CSV Dataset](https://data.lacity.org/api/views/amvf-fr72/rows.csv?accessType=DOWNLOAD) <br />
+Data Type: CSV .<br />
+This dataset reflects arrest incidents in the City of Los Angeles from 2020 to present. This data is transcribed from original arrest reports that are typed on paper and therefore there may be some inaccuracies within the data
 
 ## Work Packages
 ### Work Package 1: Data Collection
