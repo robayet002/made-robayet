@@ -1,0 +1,92 @@
+pipeline WorldBankDataPipeline {
+
+    // Extract the Excel file from the provided URL
+    block ExcelFileExtractor oftype HttpExtractor {
+        	url:"https://thedocs.worldbank.org/en/doc/7d852628d96b9411d43e5d36d5dff941-0050062022/original/Graphs-Chapter-5-02082022.xlsx";
+    }
+
+    // Interpret the downloaded file as an Excel workbook
+    block WorkbookInterpreter oftype XLSXInterpreter { }
+
+    // Select the specific sheet
+    block SheetSelector oftype SheetPicker {
+        sheetName: "Figure S5.1.2";
+    }
+
+    // Select the data range from cell P2 to S45
+    block DataRangeSelector oftype CellRangeSelector {
+        select: range P2:S45;
+    }
+
+    // Rename the header columns as specified
+    block RenameHeaders oftype CellWriter {
+      at: range P2:S2;
+      write: [
+        "Country Code",        // from "ISO3"
+        "Economy",             // unchanged
+        "GDP per Capita",      // clearer
+        "Bond Issuance Share"  // simplified
+      ];
+    }
+
+    // Define custom value types with constraints
+    valuetype PositiveDecimal oftype decimal {
+        constraints: [PositiveValue];
+    }
+
+    valuetype BondIssuanceDecimal oftype decimal {
+        constraints: [ValueBetweenZeroAndOne];
+    }
+
+    constraint PositiveValue on decimal:
+        value > 0;
+
+    constraint ValueBetweenZeroAndOne on decimal:
+        value >= 0 and value <= 1;
+    
+    // prepare bond table for DB
+     block FormatBondTable oftype TableInterpreter {
+       header: true;
+       columns: [
+         "Country Code" oftype CountryCodeAlpha3,
+         "Bond Issuance Share" oftype BondIssuanceDecimal
+      ];
+     }
+
+    // prepare GDP table for DB
+      block FormatGdpTable oftype TableInterpreter {
+       header: true;
+       columns: [
+         "Country Code" oftype CountryCodeAlpha3,
+         "GDP per Capita" oftype PositiveDecimal
+       ];
+      }
+
+
+    // Load data into the "gdpPerCapita" table in SQLite
+    block GDPTableLoader oftype SQLiteLoader {
+        table: "gdpPerCapita";
+        file: "./country-stats.sqlite";
+    }
+
+    // Load data into the "bondIssuance" table in SQLite
+    block BondTableLoader oftype SQLiteLoader {
+        table: "bondIssuance";
+        file: "./country-stats.sqlite";
+    }
+
+    // Define the pipeline flow
+    ExcelFileExtractor
+        -> WorkbookInterpreter
+        -> SheetSelector
+	-> RenameHeaders
+        -> DataRangeSelector
+	-> FormatGdpTable
+        -> GDPTableLoader;
+
+    DataRangeSelector
+	-> FormatBondTable
+        -> BondTableLoader;
+	
+	
+}
