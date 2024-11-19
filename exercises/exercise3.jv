@@ -22,10 +22,10 @@ pipeline WorldBankDataPipeline {
     block RenameHeaders oftype CellWriter {
       at: range P2:S2;
       write: [
-        "Country Code",        // from "ISO3"
-        "Economy",             // unchanged
-        "GDP per Capita",      // clearer
-        "Bond Issuance Share"  // simplified
+        "Country Code",        
+        "Economy",             
+        "GDP per Capita",    
+        "Bond Issuance Share"  
       ];
     }
 
