@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Define the path to the Python script
-PYTHON_SCRIPT_PATH="path_to_your_python_script.py"
+PYTHON_SCRIPT_PATH="pipeline.py"
 
 # Execute the data pipeline script
 echo "Running the data pipeline script..."
