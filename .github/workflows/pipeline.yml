@@ -30,4 +30,4 @@ jobs:
 
     - name: Run test
       run: |
-        python3 ./project/test.py
+        python3 ./project/tests.py
