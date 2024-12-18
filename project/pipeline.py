@@ -232,7 +232,7 @@ def main():
     finally:
         conn.close()
 
-        # Save the merged DataFrame to a CSV file
+     # Save the merged DataFrame to a CSV file
     output_csv = os.path.join(os.getcwd(), 'merged_dataset.csv')
     merged_df.to_csv(output_csv, index=False, encoding='utf-8-sig')
     logging.info(f"Merged dataset saved as {output_csv}")
